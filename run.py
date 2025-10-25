@@ -178,9 +178,10 @@ def solve(lines: list[str]) -> int:
 
 
 def main():
+    # Чтение входных данных
     lines = []
     for line in sys.stdin:
-        lines.append(line.rstrip('\n'))
+        lines.append(line.strip())
 
     result = solve(lines)
     print(result)
