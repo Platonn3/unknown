@@ -1,6 +1,6 @@
 import heapq
 import sys
-from typing import Generator
+from typing import Any, Generator
 
 labyrinth_depth = 2
 
@@ -87,7 +87,7 @@ def is_hall_path_clear(start_pos: int, end_pos: int, positions: str) -> bool:
     return True
 
 
-def get_all_ways_from_hall(positions: str) -> Generator[tuple[int, str], None]:
+def get_all_ways_from_hall(positions: str) -> Generator[tuple[int, str], Any, None]:
     for i in range(11):
         if positions[i] == ".":
             continue
@@ -125,7 +125,7 @@ def get_all_ways_from_hall(positions: str) -> Generator[tuple[int, str], None]:
         yield current_cost, "".join(new_position)
 
 
-def get_all_ways_from_rooms(positions: str) -> Generator[tuple[int, str], None]:
+def get_all_ways_from_rooms(positions: str) -> Generator[tuple[int, str], Any, None]:
     room_top_indices = [11, 13, 15, 17] if labyrinth_depth == 2 else [11, 15, 19, 23]
     hall_indexes = [0, 1, 3, 5, 7, 9, 10]
 
@@ -158,6 +158,7 @@ def get_all_ways_from_rooms(positions: str) -> Generator[tuple[int, str], None]:
                         steps = abs(hall_dest_idx - current_room_door) + (d + 1)
                         current_cost = steps * costs[amphipod_letter]
                         yield current_cost, "".join(new_position)
+
                 break
 
 
@@ -168,7 +169,7 @@ def is_final_state(position: str) -> bool:
     return position[11:15] == "AAAA" and position[15:19] == "BBBB" and position[19:23] == "CCCC" and position[23:27] == "DDDD"
 
 
-def get_all_ways(positions: str) -> Generator[tuple[int, str], None]:
+def get_all_ways(positions: str) -> Generator[tuple[int, str], Any, None]:
     yield from get_all_ways_from_hall(positions)
     yield from get_all_ways_from_rooms(positions)
 
@@ -191,7 +192,7 @@ def solve(lines: list[str]) -> int:
     return -1
 
 
-def main() -> None:
+def main():
     # Чтение входных данных
     lines = []
     for line in sys.stdin:
