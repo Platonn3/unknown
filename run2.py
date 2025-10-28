@@ -38,6 +38,7 @@ def solve() -> list[str]:
 
         result.append(f"{node}-{parent}")
         graph[parent].remove(node)
+        graph[node].remove(parent)
 
 
 def main():
@@ -46,11 +47,12 @@ def main():
         if line:
             node1, sep, node2 = line.partition('-')
             if sep:
-                if node1.isupper():
-                    node1, node2 = node2, node1
                 if node1 not in graph:
                     graph[node1] = []
+                if node2 not in graph:
+                    graph[node2] = []
                 graph[node1].append(node2)
+                graph[node2].append(node1)
 
     result = solve()
     for edge in result:
