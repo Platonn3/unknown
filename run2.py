@@ -28,6 +28,7 @@ def can_virus_reach_gateway(copied_graph: dict[str, str], virus_pos: str) -> boo
     reachable, _ = bfs(virus_pos, copied_graph)
     if len(reachable) == 0:
         return False
+    reachable.sort()
     return reachable[0][0] == 1
 
 
