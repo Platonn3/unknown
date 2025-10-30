@@ -61,7 +61,7 @@ def solve() -> list[str]:
             if not can_virus_reach_gateway(copied_graph, current_position):
                 break
 
-        result.append(f"{gateway}{node}")
+        result.append(f"{gateway}-{node}")
         graph[gateway].remove(node)
         graph[node].remove(gateway)
 
