@@ -16,7 +16,7 @@ def bfs():
     while len(q) > 0:
         current, dist, current_way = q.popleft()
         current_way.append(current)
-        for neighbour in graph.get(current, []):
+        for neighbour in sorted(graph.get(current, [])):
             if neighbour not in visited:
                 visited.add(neighbour)
                 if neighbour.isupper():
