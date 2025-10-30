@@ -11,18 +11,17 @@ def bfs():
     parents = {'a': None}
     reachable = []
     visited = set()
-    q.append(('a', 0, []))
+    q.append(('a', 0))
     visited.add('a')
     while len(q) > 0:
-        current, dist, current_way = q.popleft()
-        current_way.append(current)
-        for neighbour in graph.get(current, []):
+        current, dist = q.popleft()
+        for neighbour in sorted(graph.get(current, [])):
             if neighbour not in visited:
                 visited.add(neighbour)
                 if neighbour.isupper():
-                    reachable.append((dist + 1, neighbour, current_way))
+                    reachable.append((dist + 1, neighbour))
                 parents[neighbour] = current
-                q.append((neighbour, dist + 1, current_way))
+                q.append((neighbour, dist + 1))
     return sorted(reachable), parents
 
 
@@ -34,7 +33,7 @@ def solve() -> list[str]:
         if len(reachable) == 0:
             return result
 
-        _, node, _ = reachable[0]
+        _, node= reachable[0]
         parent = parents[node]
 
         result.append(f"{node}-{parent}")
